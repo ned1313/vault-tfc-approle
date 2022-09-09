@@ -1,4 +1,11 @@
 terraform {
+  cloud {
+    organization = "ned-in-the-cloud"
+
+    workspaces {
+      name = "tfc-vault-approle-demo"
+    }
+  }
   required_providers {
     vault = {
       source  = "hashicorp/vault"

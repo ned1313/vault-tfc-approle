@@ -35,8 +35,13 @@ variable "vault_azure_secret_backend_role_name" {
 }
 
 variable "vault_namespace" {
-  type = string
+  type        = string
   description = "The Vault namespace"
-  default = null
+  default     = null
+}
+
+variable "vault_address" {
+  type        = string
+  description = "The Vault server address"
 }
   

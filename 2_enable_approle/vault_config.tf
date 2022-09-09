@@ -36,7 +36,7 @@ resource "vault_approle_auth_backend_role_secret_id" "tfc_dev" {
 data "azurerm_subscription" "current" {}
 
 resource "vault_azure_secret_backend" "tfc_dev" {
-  path = "azure-dev"
+  path                    = "azure-dev"
   use_microsoft_graph_api = true
   subscription_id         = data.azurerm_subscription.current.subscription_id
   tenant_id               = data.azuread_client_config.current.tenant_id
@@ -47,13 +47,13 @@ resource "vault_azure_secret_backend" "tfc_dev" {
 
 resource "vault_azure_secret_backend_role" "dev_role" {
   backend = vault_azure_secret_backend.tfc_dev.path
-  role = "dev-role"
-  ttl = 300
+  role    = "dev-role"
+  ttl     = 300
   max_ttl = 600
 
   azure_roles {
     role_name = "Contributor"
-    scope = "${data.azurerm_subscription.current.id}"
+    scope     = data.azurerm_subscription.current.id
   }
 
   depends_on = [

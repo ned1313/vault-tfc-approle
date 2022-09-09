@@ -7,9 +7,10 @@ provider "azurerm" {
 }
 
 provider "vault" {
-    namespace = var.vault_namespace
+  namespace = var.vault_namespace
+  address   = var.vault_address
   auth_login {
-    path = "auth/${var.approle_path}/login"
+    path      = "auth/${var.approle_path}/login"
     namespace = var.vault_namespace
     parameters = {
       role_id   = var.role_id
@@ -21,10 +22,10 @@ provider "vault" {
 data "vault_azure_access_credentials" "creds" {
   backend                     = var.vault_azure_secret_backend_path
   role                        = var.vault_azure_secret_backend_role_name
-  validate_creds              = true
-  num_sequential_successes    = 3
-  num_seconds_between_tests   = 1
-  max_cred_validation_seconds = 100
+  validate_creds              = false
+  #num_sequential_successes    = 3
+  #num_seconds_between_tests   = 1
+  #max_cred_validation_seconds = 100
 }
 
 # Create a single resource group
